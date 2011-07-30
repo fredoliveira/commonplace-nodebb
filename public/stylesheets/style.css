@@ -307,7 +307,16 @@ nav .fragment.current {
   width: 30px;
   color: #ccc;
 }
-#new-fragment {
+.fragment .tools {
+  color: #999;
+  display: none;
+  margin-top: 5px;
+  font-size: 10px;
+}
+.fragment .tools a {
+  font-weight: bold;
+}
+#new input[type=text] {
   padding: 10px 30px;
   font-family: 'Droid Sans Mono', Courier, "Courier New", monospace;
   width: 80%;

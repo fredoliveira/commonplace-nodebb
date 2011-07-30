@@ -28,7 +28,7 @@ post "/fragments" do
 	fragment.save
 	
 	# render the final fragment, from mongo
-	fragment.merge.to_json
+	fragment.to_json
 end
 
 delete "/fragments/:id" do

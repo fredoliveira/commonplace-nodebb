@@ -5,7 +5,7 @@
 	<title>Commonplace</title>
 		
 	<script src="/js/vendor/jquery-1.5.1.min.js"></script>
-	<script src="/js/vendor/jquery-ui-1.8.14.custom.min.js"></script>
+	<script src="/js/jquery.timeago.js"></script>
 	<script src="/js/vendor/underscore.js"></script>
 	<script src="/js/vendor/backbone.js"></script>
 	<script src="/js/commonplace.js"></script>
@@ -18,6 +18,10 @@
 		<div class="content">
 			<%%= title %>
 			<%%= content %>
+
+			<div class="tools">
+				&gt; Added <abbr class="timeago" title="<%%= created_at %>"></abbr> - <a href="#" class="delete">Delete</a>
+			</div>
 		</div>
 	</script>
 
@@ -39,7 +43,8 @@
 	</nav>
 	<div id="commonplace">
 		<div id="new">
-			<input type="text" name="text" value="" id="new-fragment" placeholder="Write here.">
+			<input type="text" name="text" id="new-fragment" placeholder="Write here. Then press enter.">
+			<input type="text" name="text" id="new-image" placeholder="Type in an image URL">
 		</div>
 
 		<div id="timeline">

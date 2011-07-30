@@ -20,7 +20,8 @@ $(document).ready(function() {
 		className: 'fragment',
 		
 		events: {
-			"click .handle": "clear"
+			"click": "showTools",
+			"click .delete": "clear"
 		},
 		
 		initialize: function(options) {
@@ -33,12 +34,15 @@ $(document).ready(function() {
 		
 		render: function() {
 			$(this.el).html(this.template(this.model.toJSON()));
+			this.$('abbr').timeago();
 			return this;
 		},
 		
+		showTools: function() {
+			this.$('.tools').toggle();
+		},
+		
 		clear: function() {
-			console.log(this.model.get('id'));
-			console.log(this.model.isNew());
 			this.model.destroy();
 		}
 	});
@@ -107,5 +111,5 @@ $(document).ready(function() {
 	window.timeline = new Timeline;
 	window.fragmentForm = new FragmentForm;
 
-	Fragments.fetch();		
+	Fragments.fetch();	
 });
