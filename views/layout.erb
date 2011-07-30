@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+	<meta charset="utf-8">
+	<title>Commonplace</title>
+		
+	<script src="/js/vendor/jquery-1.5.1.min.js"></script>
+	<script src="/js/vendor/jquery-ui-1.8.14.custom.min.js"></script>
+	<script src="/js/vendor/underscore.js"></script>
+	<script src="/js/vendor/backbone.js"></script>
+	<script src="/js/commonplace.js"></script>
+	
+	<link href='http://fonts.googleapis.com/css?family=Droid+Sans+Mono' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="/stylesheets/style.css" type="text/css" media="screen" charset="utf-8">
+	
+	<script type="text/template" id="fragment">
+		<div class="handle" id="f_<%%= id %>">#</div>
+		<div class="content">
+			<%%= title %>
+			<%%= content %>
+		</div>
+	</script>
+
+	<script type="text/template" id="fragment-image">
+		<div class="handle" id="f_<%%= id %>">#</div>
+		<div class="content">
+	 		<img src="<%%= content %>" />
+		</div>
+	</script>
+
+	<script type="text/template" id="fragment-sidebar">
+		<%%= title %>
+	</script>
+</head>
+
+<body>
+	<nav id="sidebar">
+
+	</nav>
+	<div id="commonplace">
+		<div id="timeline">
+			
+		</div>
+
+		<%= yield %>
+	</div>	
+</body>
+</html>
