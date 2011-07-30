@@ -307,3 +307,10 @@ nav .fragment.current {
   width: 30px;
   color: #ccc;
 }
+#new-fragment {
+  padding: 10px 30px;
+  font-family: 'Droid Sans Mono', Courier, "Courier New", monospace;
+  width: 80%;
+  font-size: 15px;
+  margin-bottom: 2em;
+}

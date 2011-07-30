@@ -5,6 +5,8 @@
 @bg: #eee; /* main page background color */
 @sb: 200px; /* sidebar size */
 
+@handlesize: 30px;
+
 body {
 	background: @bg;
 	padding: 0px;
@@ -63,13 +65,21 @@ nav {
 	line-height: 1.7em;
 	
 	.content {
-		margin-left: 30px;
+		margin-left: @handlesize;
 	}
 	
 	.handle {
 		float: left;
 		font-size: 20px;
-		width: 30px;
+		width: @handlesize;
 		color: #ccc;
 	}
+}
+
+#new-fragment {
+	padding: 10px @handlesize;
+	font-family: @mono;
+	width: 80%;
+	font-size: 15px;
+	margin-bottom: 2em;
 }

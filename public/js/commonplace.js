@@ -1,7 +1,7 @@
 $(document).ready(function() {
 	
 	window.Fragment = Backbone.Model.extend({
-		
+		//idAttribute: "_id"
 	});
 	
 	window.FragmentList = Backbone.Collection.extend({
@@ -20,7 +20,7 @@ $(document).ready(function() {
 		className: 'fragment',
 		
 		events: {
-			"click .handle": "test"
+			"click .handle": "clear"
 		},
 		
 		initialize: function(options) {
@@ -36,32 +36,10 @@ $(document).ready(function() {
 			return this;
 		},
 		
-		test: function() {
-			console.log("poop");
-		}
-	});
-	
-	window.SidebarView = Backbone.View.extend({
-		el: $('#sidebar'),
-		
-		initialize: function() {
-			Fragments.bind('add', this.addOne, this);
-			Fragments.bind('reset', this.addAll, this);
-			Fragments.bind('all', this.render, this);
-		},
-		
-		render: function() {
-			return this;
-		},
-		
-		addOne: function(fragment) {
-			var view = new FragmentView({model: fragment, template: "#fragment-sidebar"});
-			// FIXME, should use this.el
-			$('#sidebar').append(view.render().el);
-		},
-		
-		addAll: function() {
-			Fragments.each(this.addOne)
+		clear: function() {
+			console.log(this.model.get('id'));
+			console.log(this.model.isNew());
+			this.model.destroy();
 		}
 	});
 	
@@ -85,7 +63,7 @@ $(document).ready(function() {
 				var view = new FragmentView({model: fragment, template: "#fragment"});
 			}
 			// FIXME, should use this.el
-			$('#timeline').append(view.render().el);
+			$('#timeline').prepend(view.render().el);
 		},
 		
 		addAll: function() {
@@ -93,12 +71,41 @@ $(document).ready(function() {
 		}
 	});
 	
+	window.FragmentForm = Backbone.View.extend({
+		el: $('#new'),
+		
+		events: {
+			"keypress #new-fragment": "createOnEnter"
+		},
+		
+		initialize: function() {
+			_.bindAll(this, 'render');
+			this.input = this.$('#new-fragment');
+		},
+		
+		render: function() {
+			return this;
+		},
+		
+		createOnEnter: function(e) {
+			if (e.keyCode != 13) return;
+			Fragments.create(this.newAttributes());
+			this.input.val('');
+		},
+		
+		newAttributes: function() {
+			return {
+				content: this.input.val()
+			};
+		}
+	});
+	
 	/* grab our fragments from the server */
 	window.Fragments = new FragmentList;
 
 	/* init our views */
-	//window.sidebar = new SidebarView;
 	window.timeline = new Timeline;
+	window.fragmentForm = new FragmentForm;
 
 	Fragments.fetch();		
 });
