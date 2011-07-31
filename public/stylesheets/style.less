@@ -87,10 +87,41 @@ nav {
 	}
 }
 
-#new input[type=text] {
-	padding: 10px @handlesize;
-	font-family: @mono;
-	width: 80%;
-	font-size: 15px;
+#new {
 	margin-bottom: 2em;
+
+	a {
+		display: inline-block;
+		background: #ddd;
+		padding: 5px 10px;
+		margin-bottom: 3px;
+		.border-radius(3px);
+		color: #999;
+		font-family: @mono;
+		font-size: 10px;
+	}
+	
+	#new-fragment {
+		padding: 10px @handlesize;
+		font-family: @mono;
+		width: 80%;
+		font-size: 15px;
+	}
+
+	span {
+		display: block;
+		font-family: @mono;
+		font-size: 10px;
+		color: #ccc;
+	}
+	
+	#new-image {
+		display: none;
+
+		padding: 10px @handlesize;
+		font-family: @mono;
+		width: 80%;
+		font-size: 15px;
+		margin-bottom: 2em;
+	}
 }

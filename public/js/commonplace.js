@@ -1,3 +1,17 @@
+function urlify(text) {
+    var urlRegex = /(https?:\/\/[^\s]+)/g;
+    return text.replace(urlRegex, function(url) {
+        return '<a href="' + url + '">' + url + '</a>';
+    })
+}
+
+function parsetext(text) {
+	/* convert urls */
+	text = urlify(text); 
+	/* and breaks into br */
+	return text.replace(/\n/g, "<br />");
+}
+
 $(document).ready(function() {
 	
 	window.Fragment = Backbone.Model.extend({
@@ -20,7 +34,7 @@ $(document).ready(function() {
 		className: 'fragment',
 		
 		events: {
-			"click": "showTools",
+			"click .handle": "showTools",
 			"click .delete": "clear"
 		},
 		
@@ -79,6 +93,8 @@ $(document).ready(function() {
 		el: $('#new'),
 		
 		events: {
+			"click .text": "showText",
+			"click .image": "showImage",
 			"keypress #new-fragment": "createOnEnter"
 		},
 		
@@ -92,15 +108,33 @@ $(document).ready(function() {
 		},
 		
 		createOnEnter: function(e) {
-			if (e.keyCode != 13) return;
-			Fragments.create(this.newAttributes());
-			this.input.val('');
+			if (e.keyCode == 13 && e.shiftKey) {
+				if(this.input.val() != '') {
+					Fragments.create(this.newAttributes());
+					this.input.val('');
+				}
+			} else {
+				return;
+			}
 		},
 		
 		newAttributes: function() {
 			return {
 				content: this.input.val()
 			};
+		},
+		
+		showText: function() {
+			this.$('#new-image').hide();
+			this.$('#new-fragment').show();
+			this.$('.text').addClass('current');
+			this.$('.text').removeClass('current');
+		},
+		
+		showImage: function() {
+			this.$('#new-fragment').hide();
+			this.$('#new-image').show();
+			this.$('.image').removeClass('current');
 		}
 	});
 	
@@ -112,4 +146,6 @@ $(document).ready(function() {
 	window.fragmentForm = new FragmentForm;
 
 	Fragments.fetch();	
+
+	$('textarea#new-fragment').autoResize({extraSpace : 60});
 });

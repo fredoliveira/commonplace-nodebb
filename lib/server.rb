@@ -11,7 +11,9 @@ end
 
 get "/fragments" do
 	content_type "application/json"
-	@f = Fragment.all(:order => :created_at.asc).to_json
+	#@f = Fragment.all(:order => :created_at.asc).to_json
+	
+	fragments = Fragment.all(:order => :created_at.asc)
 end
 
 post "/fragments" do 

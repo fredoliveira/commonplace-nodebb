@@ -316,7 +316,34 @@ nav .fragment.current {
 .fragment .tools a {
   font-weight: bold;
 }
-#new input[type=text] {
+#new {
+  margin-bottom: 2em;
+}
+#new a {
+  display: inline-block;
+  background: #ddd;
+  padding: 5px 10px;
+  margin-bottom: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  color: #999;
+  font-family: 'Droid Sans Mono', Courier, "Courier New", monospace;
+  font-size: 10px;
+}
+#new #new-fragment {
+  padding: 10px 30px;
+  font-family: 'Droid Sans Mono', Courier, "Courier New", monospace;
+  width: 80%;
+  font-size: 15px;
+}
+#new span {
+  display: block;
+  font-family: 'Droid Sans Mono', Courier, "Courier New", monospace;
+  font-size: 10px;
+  color: #ccc;
+}
+#new #new-image {
+  display: none;
   padding: 10px 30px;
   font-family: 'Droid Sans Mono', Courier, "Courier New", monospace;
   width: 80%;
