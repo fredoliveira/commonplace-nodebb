@@ -2,8 +2,9 @@
 
 @ff: "Helvetica Neue", Helvetica, Arial, sans-serif;
 @mono: 'Droid Sans Mono', Courier, "Courier New", monospace;
+@serif: 'Gentium Basic', Georgia, Times, serif;
 @bg: #eee; /* main page background color */
-@sb: 200px; /* sidebar size */
+@sb: 0px; /* sidebar size */
 
 @handlesize: 30px;
 
@@ -11,7 +12,7 @@ body {
 	background: @bg;
 	padding: 0px;
 	margin: 0;
-	color: #444;
+	color: #222;
 	font: 12px "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
@@ -58,17 +59,35 @@ nav {
 }
 
 .fragment {
-	padding-top: 1em;
-	padding-bottom: 1em;
+	padding: 0.5em 0;
 	border-bottom: 1px dotted #ccc;
 	font-family: @mono;
 	line-height: 1.7em;
 	
-	.content {
+	.display {
+		display: block;
 		margin-left: @handlesize;
 	}
 	
+	.tools {
+		display: block;
+		margin-left: @handlesize;
+		padding-bottom: 1em;
+		
+		a {
+			font-family: @ff;
+			.button();
+			padding: 3px 10px;
+			font-size: 11px;
+		}
+	}
+	
+	.editform {
+		display: none;
+	}
+	
 	.handle {
+		padding: 0.5em 0;
 		float: left;
 		font-size: 20px;
 		width: @handlesize;
@@ -85,6 +104,32 @@ nav {
 			font-weight: bold;
 		}
 	}
+	
+	&.editing {
+		.editform {
+			display: block;
+		}
+		
+		.display {
+			display: none;
+		}
+	}
+	
+	
+	/* special content */
+	
+	img {
+		max-width: 800px;
+		max-height: 400px;
+	}
+	
+	blockquote {
+		/*font-family: @serif;*/
+/*		font-style: italic;
+*/		/*font-size: 15px;*/
+		color: #666;
+		margin-left: 0;
+	}
 }
 
 #new {
@@ -99,13 +144,6 @@ nav {
 		color: #999;
 		font-family: @mono;
 		font-size: 10px;
-	}
-	
-	#new-fragment {
-		padding: 10px @handlesize;
-		font-family: @mono;
-		width: 80%;
-		font-size: 15px;
 	}
 
 	span {
@@ -124,4 +162,12 @@ nav {
 		font-size: 15px;
 		margin-bottom: 2em;
 	}
+}
+
+	
+#new-fragment, .edit-fragment {
+	padding: 10px @handlesize;
+	font-family: @mono;
+	width: 80%;
+	font-size: 15px;
 }

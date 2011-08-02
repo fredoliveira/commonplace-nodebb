@@ -9,31 +9,24 @@
 	<script src="/js/vendor/backbone.js"></script>
 	<script src="/js/jquery.autoresize.min.js"></script>
 	<script src="/js/jquery.timeago.js"></script>
+	<script src="/js/showdown.js"></script>
 	<script src="/js/commonplace.js"></script>
 	
 	<link href='http://fonts.googleapis.com/css?family=Droid+Sans+Mono' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Gentium+Basic:400italic' rel='stylesheet' type='text/css'>
+	
 	<link rel="stylesheet" href="/stylesheets/style.css" type="text/css" media="screen" charset="utf-8">
 	
 	<script type="text/template" id="fragment">
 		<div class="handle" id="f_<%%= id %>">#</div>
-		<div class="content">
-			<%%= title %>
-			<%%= parsetext(content) %>
-
-			<div class="tools">
-				&gt; Added <abbr class="timeago" title="<%%= created_at %>"></abbr> - <a href="#" class="delete">Delete</a>
-			</div>
+		<div class="display">
+			<div class="content"></div>
 		</div>
-	</script>
-
-	<script type="text/template" id="fragment-image">
-		<div class="handle" id="f_<%%= id %>">#</div>
-		<div class="content">
-	 		<img src="<%%= content %>" />
-	
-			<div class="tools">
-				&gt; Added <abbr class="timeago" title="<%%= created_at %>"></abbr> - <a href="#" class="delete">Delete</a>
-			</div>
+		<div class="editform">
+			<textarea class="edit-fragment" rows="3" cols="40"></textarea>
+		</div>
+		<div class="tools">
+			&gt; Added <abbr class="timeago" title="<%%= created_at %>"></abbr> - <a href="#" class="edit">Edit</a> <a href="#" class="delete">Delete</a>
 		</div>
 	</script>
 
@@ -43,9 +36,6 @@
 </head>
 
 <body>
-	<nav id="sidebar">
-
-	</nav>
 	<div id="commonplace">
 		<div id="new">
 			<textarea id="new-fragment" rows="1" cols="40"></textarea>

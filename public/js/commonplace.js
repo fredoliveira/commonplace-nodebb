@@ -35,7 +35,10 @@ $(document).ready(function() {
 		
 		events: {
 			"click .handle": "showTools",
-			"click .delete": "clear"
+			"click .edit": "edit",
+			"click .delete": "clear",
+			"dlbclick div.content": "edit",
+			"keypress textarea.edit-fragment": "closeOnEnter"
 		},
 		
 		initialize: function(options) {
@@ -48,8 +51,39 @@ $(document).ready(function() {
 		
 		render: function() {
 			$(this.el).html(this.template(this.model.toJSON()));
+			this.setContent();
 			this.$('abbr').timeago();
 			return this;
+		},
+		
+		setContent: function() {
+			var content = this.model.get('content');
+			this.$('.content').html(converter.makeHtml(content));
+			this.input = this.$('.edit-fragment');
+			this.input.bind('blur', _.bind(this.closeAndSave, this));
+			this.input.val(content);
+		},
+		
+		edit: function() {
+			$(this.el).addClass("editing");
+			this.input.focus();
+		},
+		
+		closeAndSave: function() {
+			// TODO: wondering if this should save, or just close.
+			this.model.save({content: this.input.val()});
+			$(this.el).removeClass("editing");
+		},
+		
+		closeOnEnter: function(e) {
+			if (e.keyCode == 13 && e.shiftKey) {
+				if(this.input.val() != '') {
+					this.model.save({content: this.input.val()});
+					$(this.el).removeClass("editing");
+				}
+			} else {
+				return;
+			}
 		},
 		
 		showTools: function() {
@@ -146,6 +180,8 @@ $(document).ready(function() {
 	window.fragmentForm = new FragmentForm;
 
 	Fragments.fetch();	
+	
+	window.converter = new Showdown.converter();
 
 	$('textarea#new-fragment').autoResize({extraSpace : 60});
 });

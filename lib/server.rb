@@ -11,9 +11,8 @@ end
 
 get "/fragments" do
 	content_type "application/json"
-	#@f = Fragment.all(:order => :created_at.asc).to_json
-	
-	fragments = Fragment.all(:order => :created_at.asc)
+	#@f = Fragment.all(:order => :created_at.asc).to_json	
+	fragments = Fragment.all(:order => :created_at.asc).to_json
 end
 
 post "/fragments" do 
@@ -30,6 +29,18 @@ post "/fragments" do
 	fragment.save
 	
 	# render the final fragment, from mongo
+	fragment.to_json
+end
+
+put "/fragments/:id" do
+	fragment = Fragment.find(params[:id])
+	
+	# parse the body, save the new content
+	# FIXME validate fragment access
+	input = JSON.parse(request.body.read)
+	fragment.content = input['content']
+	
+	fragment.save
 	fragment.to_json
 end
 
